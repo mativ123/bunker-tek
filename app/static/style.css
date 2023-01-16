@@ -80,3 +80,24 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, select:hov
     border: 2px solid black;
     width: 30%;
 }
+
+#kurv {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#total {
+    font-size: 2.5em;
+    color: red;
+}
+
+#kurv-element {
+    display: flex;
+    justify-content: space-between;
+}
+
+#kurv-button:hover {
+    background-color: #f5426c;
+
+}

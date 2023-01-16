@@ -81,4 +81,20 @@ def kurv():
 
 @app.route('/cart', methods=['GET', 'POST'])
 def cart():
-    return render_template("kurv.html", title="Kurv", kurv=session.get('kurv'))
+    if not session.get('kurv'):
+        return render_template("kurv.html", title="kurv", tom=True)
+    total = 0
+    rum_kurv = []
+    for rum in session['kurv']:
+        for dicto in rooms:
+            if dicto['navn'] == rum:
+                total += dicto['pris']
+                rum_kurv.append(dicto)
+    return render_template("kurv.html", title="Kurv", kurv=rum_kurv, total=total)
+
+@app.route('/api/rkurv', methods=['GET', 'POST'])
+def r_kurv():
+    kurv_list = session['kurv']
+    kurv_list.pop(int(request.json['id']) - 1)
+    session['kurv'] = kurv_list
+    return jsonify({"success": True})
