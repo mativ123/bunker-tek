@@ -13,7 +13,6 @@ rooms = [
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
-@login_required
 def index():
     return render_template('index.html', title='Home', user=current_user)
 
@@ -71,6 +70,15 @@ def kontakt():
 
 @app.route('/api/kurv', methods=['GET', 'POST'])
 def kurv():
-    session['kurv'] = request.json['navn']
-    print(session.get('kurv', 'not set'))
-    return jsonify({'din': 'mor'})
+    if not session.get('kurv'):
+        session['kurv'] = []
+    kurv_list = session['kurv']
+    kurv_list.append(request.json['navn'])
+    session['kurv'] = kurv_list
+    print(session['kurv'])
+    # return redirect(url_for('rum'))
+    return jsonify({"din": "mor"})
+
+@app.route('/cart', methods=['GET', 'POST'])
+def cart():
+    return render_template("kurv.html", title="Kurv", kurv=session.get('kurv'))

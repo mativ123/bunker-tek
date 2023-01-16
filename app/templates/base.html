@@ -15,6 +15,12 @@
             <a href="{{ url_for('rum') }}">Rum</a>
             <a href="{{ url_for('om') }}">Om</a>
             <a href="{{ url_for('kontakt') }}">Kontakt</a>
+            {% if session.get('kurv') %}
+            <a href="{{ url_for('cart') }}">Kurv: {{ session['kurv']|length }}</a>
+            {% else %}
+            <a href="{{ url_for('cart') }}">Kurv: tom</a>
+            {% endif %}
+            <a href="{{ url_for('cart') }}">Kurv</a>
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Login</a>
             {% else %}

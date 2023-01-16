@@ -15,8 +15,9 @@
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body:   JSON.stringify({"navn": navn}),
+        }).then((res) => {
+            location.reload();
         });
     }
 </script>
-<!-- <button onclick="dinmor()">Din mor</button> -->
 {% endblock %}

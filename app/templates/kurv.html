@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Kurv</h1>
+    {% if not kurv %}
+        <p>Kurven er tom!</p>
+    {% else %}
+        {% for item in kurv %}
+            <p>{{ item }}</p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

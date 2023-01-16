@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Velkommen {{ user.username }}</h1>
+    <h1>Bunkere</h1>
+    <ul>
+        <li><a href="{{ url_for('rum') }}">Rum</a></li>
+        <li><a href="{{ url_for('pakker') }}">Pakker</a></li>
+        <li><a href="{{ url_for('om') }}">Om</a></li>
+    </ul>
 {% endblock %}
