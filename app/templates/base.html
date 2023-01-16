@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>Spørgeskema hjemmeside</title>
+        {% endif %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    </head>
+    <body>
+        <div id="navbar">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('pakker') }}">Pakker</a>
+            <a href="{{ url_for('rum') }}">Rum</a>
+            <a href="{{ url_for('om') }}">Om</a>
+            <a href="{{ url_for('kontakt') }}">Kontakt</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </div>
+        <div class="flash">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+        </div>
+        <div id="block">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

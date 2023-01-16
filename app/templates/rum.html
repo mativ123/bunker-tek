@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<div id="rooms">
+    {% for dicts in rooms %}
+    <button onclick="dinmor('{{ dicts["navn"] }}')" class="rum">
+                <img src='{{ url_for('static', filename='') }}{{ dicts["navn"] }}.jpg' alt="{{ dicts["navn"] }}" width="90%"/>
+                <p>{{ dicts["navn"] }}: {{ dicts["pris"] }}</p>
+            </button>
+    {% endfor %}
+</div>
+<script charset="utf-8">
+    function dinmor(navn) {
+        fetch("/api/kurv", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body:   JSON.stringify({"navn": navn}),
+        });
+    }
+</script>
+<!-- <button onclick="dinmor()">Din mor</button> -->
+{% endblock %}

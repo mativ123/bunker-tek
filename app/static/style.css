@@ -1,0 +1,82 @@
+* { padding: 0; margin: 0; }
+
+html, body {
+    background-color: lightgray;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.flash {
+    width: 50%;
+    margin-left: 25%;
+}
+
+
+#block, .flash {
+    width: 50%;
+    margin-left: 25%;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: whitesmoke;
+}
+
+#block {
+    flex-grow: 1;
+}
+
+#block *, .flash * {
+    margin: 10px;
+}
+
+#block a:any-link:not(a:hover) {
+    color: black;
+}
+
+#block a:any-link {
+    margin: 0;
+}
+
+#navbar {
+    padding: 0.7% 5px;
+    background-color: whitesmoke;
+    font-size: large;
+    border-bottom: 2px solid black;
+    float: left;
+}
+
+#navbar a:any-link:not(a:hover) {
+    color: black;
+}
+
+#navbar a:any-link {
+    margin-right: 1%;
+}
+
+button, input[type="button"], input[type="submit"], select {
+    background-color: inherit;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+button:hover, input[type="button"]:hover, input[type="submit"]:hover, select:hover {
+    background-color: #caffc7;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+#rooms {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.rum {
+    border: 2px solid black;
+    width: 30%;
+}
