@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Kurv</h1>
+    {% if tom %}
+        <p>Kurven er tom!</p>
+    {% else %}
+        <div id="kurv">
+            <div class="rum">
+                {% for rum in kurv %}
+                    <div id="kurv-element">
+                        <p>{{ rum['navn'] }}: {{ rum['pris'] }}</p>
+                        <button id="kurv-button" onclick="r_kurv({{ loop.index }})">X</button>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+        <p class="total">{{ total }} dkk</p>
+        <a href="{{ url_for('betal') }}">Betal</a>
+    {% endif %}
+    <script charset="utf-8">
+        function r_kurv(id) {
+            fetch('/api/rkurv', {
+                method:  "POST",
+                headers: {"Content-Type": "application/json"},
+                body:    JSON.stringify({"id": id}),
+            }).then((res) => {
+                location.reload();
+            });
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Betal</h1>
+{% if not session.get('kurv') %}
+    <p>Kurven er tom!</p>
+{% else %}
+    <h2>Odre:</h2>
+    {% for produkt in session['kurv'] %}
+    <p>{{ produkt }}</p>
+    {% endfor %}
+{% endif %}
+{% endblock %}
