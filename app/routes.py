@@ -6,9 +6,9 @@ from app.models import User
 from werkzeug.urls import url_parse
 
 rooms = [
-    {"navn": "toilet", "pris": 15000},
-    {"navn": "stue", "pris": 12000},
-    {"navn": "køkken", "pris": 20000},
+    {"navn": "toilet", "pris": 15000, "beskrivelse": "Et toilet og så videre"},
+    {"navn": "stue", "pris": 12000, "beskrivelse": "En stue og så videre"},
+    {"navn": "køkken", "pris": 20000, "beskrivelse": "Et køkken og så videre"},
 ]
 
 @app.route('/')
@@ -76,7 +76,6 @@ def kurv():
     kurv_list.append(request.json['navn'])
     session['kurv'] = kurv_list
     print(session['kurv'])
-    # return redirect(url_for('rum'))
     return jsonify({"din": "mor"})
 
 @app.route('/cart', methods=['GET', 'POST'])
@@ -90,6 +89,7 @@ def cart():
             if dicto['navn'] == rum:
                 total += dicto['pris']
                 rum_kurv.append(dicto)
+    session['total'] = total
     return render_template("kurv.html", title="Kurv", kurv=rum_kurv, total=total)
 
 @app.route('/api/rkurv', methods=['GET', 'POST'])
@@ -98,3 +98,16 @@ def r_kurv():
     kurv_list.pop(int(request.json['id']) - 1)
     session['kurv'] = kurv_list
     return jsonify({"success": True})
+
+@app.route('/produkt', methods=['GET', 'POST'])
+def prod():
+    prod_dict = {}
+    for rum in rooms:
+        if rum['navn'] == request.args.get('name'):
+            prod_dict = rum
+            break
+    return render_template("produkt.html", title=request.args.get('name'), produkt=prod_dict)
+
+@app.route('/betal', methods=['GET', 'POST'])
+def betal():
+    return render_template("betal.html", title="Betal")

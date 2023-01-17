@@ -15,10 +15,6 @@ html, body {
 
 
 #block, .flash {
-    width: 50%;
-    margin-left: 25%;
-    border-left: 2px solid black;
-    border-right: 2px solid black;
     margin-top: 0;
     margin-bottom: 0;
     background-color: whitesmoke;
@@ -32,20 +28,36 @@ html, body {
     margin: 10px;
 }
 
-#block a:any-link:not(a:hover) {
+#block a:any-link:not(a:hover):not(.rum) {
     color: black;
 }
 
-#block a:any-link {
+#block a:any-link:not(.rum) {
     margin: 0;
 }
 
 #navbar {
     padding: 0.7% 5px;
     background-color: whitesmoke;
-    font-size: large;
+    font-size: 1.3em;
     border-bottom: 2px solid black;
-    float: left;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+#left {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+#right {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    white-space: nowrap;
 }
 
 #navbar a:any-link:not(a:hover) {
@@ -71,14 +83,16 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, select:hov
 
 #rooms {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: stretch;
     flex-wrap: wrap;
 }
 
 .rum {
     border: 2px solid black;
-    width: 30%;
+    width: 20%;
+    color: black;
+    text-decoration: none;
 }
 
 #kurv {
@@ -87,7 +101,7 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, select:hov
     align-items: stretch;
 }
 
-#total {
+.total {
     font-size: 2.5em;
     color: red;
 }
@@ -100,4 +114,10 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, select:hov
 #kurv-button:hover {
     background-color: #f5426c;
 
+}
+
+#prod {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
 }

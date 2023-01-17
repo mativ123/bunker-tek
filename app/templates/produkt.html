@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ produkt['navn'] }}</h1>
+<div id="prod">
+    <img src='{{ url_for('static', filename='') }}{{ produkt["navn"] }}.jpg' alt="{{ produkt["navn"] }}" width="50%"/>
+    <p>{{ produkt['beskrivelse'] }}</p>
+</div>
+<p class="total">{{ produkt['pris'] }} dkk</p>
+<button onclick="dinmor('{{ produkt['navn'] }}')">Put i kurv</button>
+
+<script charset="utf-8">
+    function dinmor(navn) {
+        fetch("/api/kurv", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body:   JSON.stringify({"navn": navn}),
+        }).then((res) => {
+            location.reload();
+        });
+    }
+</script>
+{% endblock %}
