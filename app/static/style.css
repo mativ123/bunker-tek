@@ -121,3 +121,31 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, select:hov
     justify-content: flex-start;
     flex-wrap: nowrap;
 }
+
+#pakker {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.pakke {
+    border: 2px solid black;
+    width: 20%;
+    color: black;
+    text-decoration: none;
+}
+
+.pakBil {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#prod_img {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+}

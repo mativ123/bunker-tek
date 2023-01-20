@@ -1,4 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ title }}</h1>
+    <h1>{{ title }}</h1>
+    <div id="pakker">
+        {% for pakke in pakker %}
+            <a class="pakke" href="{{ url_for('prod') }}?id={{ loop.index }}">
+                <div class="pakBil">
+                    {% for rum in pakke %}
+                        <img src='{{ url_for('static', filename='') }}{{ rum["navn"] }}.jpg' alt="{{ rum["navn"] }}" width="{{ 100 / pakke|length }}%" />
+                    {% endfor %}
+                </div>
+                {% set tot_pris = namespace(value=0) %}
+                <p>
+                    {% for rum in pakke %}
+                        {% set tot_pris.value = tot_pris.value + rum["pris"] %}
+                        {{ rum["navn"] }}
+                    {% endfor %}
+                </p>
+                <p>{{ tot_pris.value }}</p>
+            </a>
+        {% endfor %}
+    </div>
 {% endblock %}

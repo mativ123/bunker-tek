@@ -9,6 +9,14 @@ rooms = [
     {"navn": "toilet", "pris": 15000, "beskrivelse": "Et toilet og så videre"},
     {"navn": "stue", "pris": 12000, "beskrivelse": "En stue og så videre"},
     {"navn": "køkken", "pris": 20000, "beskrivelse": "Et køkken og så videre"},
+    {"navn": "kontor", "pris": 10000, "beskrivelse": "Et kontor og så videre"},
+    {"navn": "soveværelse", "pris": 10000, "beskrivelse": "Et soveværelse og så videre"},
+]
+
+pakke_lst = [
+    [rooms[0], rooms[1]],
+    [rooms[0], rooms[1], rooms[2]],
+    [rooms[0], rooms[1], rooms[2], rooms[3]],
 ]
 
 @app.route('/')
@@ -54,7 +62,7 @@ def register():
 
 @app.route('/pakker')
 def pakker():
-    return render_template("pakker.html", title="Pakker")
+    return render_template("pakker.html", title="Pakker", pakker=pakke_lst)
 
 @app.route('/rum')
 def rum():
@@ -101,12 +109,18 @@ def r_kurv():
 
 @app.route('/produkt', methods=['GET', 'POST'])
 def prod():
-    prod_dict = {}
-    for rum in rooms:
-        if rum['navn'] == request.args.get('name'):
-            prod_dict = rum
-            break
-    return render_template("produkt.html", title=request.args.get('name'), produkt=prod_dict)
+    is_pakke = False
+    if request.args.get('name'):
+        prod = {}
+        for rum in rooms:
+            if rum['navn'] == request.args.get('name'):
+                prod = rum
+                break
+    elif request.args.get('id'):
+        is_pakke = True
+        prod = pakke_lst[int(request.args.get('id')) - 1]
+
+    return render_template("produkt.html", title=request.args.get('name'), produkt=prod, is_pakke=is_pakke)
 
 @app.route('/betal', methods=['GET', 'POST'])
 def betal():
