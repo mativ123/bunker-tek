@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, url_for, request, jsonify, session
 from app import app, db
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, Betaling_f
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Betaling
 from werkzeug.urls import url_parse
 
 rooms = [
@@ -110,4 +110,21 @@ def prod():
 
 @app.route('/betal', methods=['GET', 'POST'])
 def betal():
-    return render_template("betal.html", title="Betal")
+    form = Betaling_f()
+    if form.validate_on_submit():
+        kurv_str = ""
+        for produkt in session['kurv']:
+            kurv_str += f"{produkt}:"
+        betaler = Betaling(adresse=form.adresse.data, kurv=kurv_str)
+        db.session.add(betaler)
+        db.session.commit()
+        temp = session['kurv']
+        session['betalt'] = temp
+        temp = []
+        session['kurv'] = temp
+        return redirect(url_for('betalt'))
+    return render_template("betal.html", title="Betal", form=form)
+
+@app.route('/betalt')
+def betalt():
+    return render_template("betalt.html", title="Betalt")
