@@ -9,4 +9,12 @@
     <p>{{ produkt }}</p>
     {% endfor %}
 {% endif %}
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.adresse.label }}
+            {{ form.adresse }}
+        </p>
+        {{ form.submit }}
+    </form>
 {% endblock %}

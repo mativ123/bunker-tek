@@ -21,3 +21,11 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+class Betaling(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    adresse = db.Column(db.String(64))
+    kurv = db.Column(db.String(64))
+
+    def __repr__(self):
+        return f"<Betaling {self.adresse}>"

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Betalt!</h1>
+<h2>odre</h2>
+<ul>
+    {% for produkt in session['betalt'] %}
+    <li>{{ produkt }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
