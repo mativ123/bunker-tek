@@ -7,13 +7,16 @@
             <p>{{ produkt['beskrivelse'] }}</p>
         </div>
         <p class="total">{{ produkt['pris'] }} dkk</p>
-        <button onclick="dinmor('{{ produkt['navn'] }}')">Put i kurv</button>
+        <button onclick="dinmor(['{{ produkt['navn'] }}'])">Put i kurv</button>
     {% else %}
+        {% set navne = namespace(value=[]) %}
         <div id="prod_img">
-                {% for rum in produkt %}
-                    <img src='{{ url_for('static', filename='') }}{{ rum["navn"] }}.jpg' alt="{{ rum["navn"] }}" width="30%"/>
-                {% endfor %}
+            {% for rum in produkt %}
+                <img src='{{ url_for('static', filename='') }}{{ rum["navn"] }}.jpg' alt="{{ rum["navn"] }}" width="30%"/>
+                {% if navne.value.append(rum["navn"]) != "None" %}{% endif %}
+            {% endfor %}
         </div>
+        <button onclick="dinmor({{ navne.value }})">Put i kurv</button>
     {% endif %}
 
     <script charset="utf-8">

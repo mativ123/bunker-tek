@@ -6,11 +6,11 @@ from app.models import User, Betaling
 from werkzeug.urls import url_parse
 
 rooms = [
-    {"navn": "toilet", "pris": 15000, "beskrivelse": "Et toilet og så videre"},
-    {"navn": "stue", "pris": 12000, "beskrivelse": "En stue og så videre"},
-    {"navn": "køkken", "pris": 20000, "beskrivelse": "Et køkken og så videre"},
-    {"navn": "kontor", "pris": 10000, "beskrivelse": "Et kontor og så videre"},
-    {"navn": "soveværelse", "pris": 10000, "beskrivelse": "Et soveværelse og så videre"},
+    {"navn": "toilet", "pris": 15000, "beskrivelse": "Et toilet med løbende vand da den bliver koblet op med dit vandværk."},
+    {"navn": "stue", "pris": 12000, "beskrivelse": "Et rum med 2 stikontakter og plads til en sofa"},
+    {"navn": "køkken", "pris": 20000, "beskrivelse": "Et rum med 3 stikontankter som bliver koblet op med dit vandværk"},
+    {"navn": "kontor", "pris": 10000, "beskrivelse": "Et mindre rum med 2 stikkontankter og plads til et skrivebord"},
+    {"navn": "soveværelse", "pris": 10000, "beskrivelse": "Et rum med plads til et par senge"},
 ]
 
 pakke_lst = [
@@ -81,7 +81,9 @@ def kurv():
     if not session.get('kurv'):
         session['kurv'] = []
     kurv_list = session['kurv']
-    kurv_list.append(request.json['navn'])
+    # kurv_list.append(request.json['navn'])
+    for navn in request.json['navn']:
+        kurv_list.append(navn)
     session['kurv'] = kurv_list
     print(session['kurv'])
     return jsonify({"din": "mor"})
